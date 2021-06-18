@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { formatCurrency } from "../utils";
 
-const ProductsContainer = (props) => {
+const ProductsContainer = ({ products }) => {
   return (
     <div>
       <ul className="products">
-        {props.products.map((product) => (
+        {products.map((product) => (
           <li key={product.id}>
             <div className="product">
               <a href={"#" + product.id}>
