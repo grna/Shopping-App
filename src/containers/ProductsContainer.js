@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { formatCurrency } from "../utils";
 
-const ProductsContainer = ({ products }) => {
+const ProductsContainer = ({ products, onAddToCart }) => {
   return (
     <div>
       <ul className="products">
@@ -15,7 +15,10 @@ const ProductsContainer = ({ products }) => {
               </a>
               <div className="product-price">
                 <div>{formatCurrency(product.price)}</div>
-                <button className="button primary">
+                <button
+                  onClick={() => onAddToCart(product)}
+                  className="button primary"
+                >
                   Add To Cart
                 </button>
               </div>
@@ -38,6 +41,7 @@ ProductsContainer.propTypes = {
       sizes: PropTypes.array.isRequired,
     })
   ),
+  onAddToCart: PropTypes.func.isRequired,
 };
 
 export default ProductsContainer;
