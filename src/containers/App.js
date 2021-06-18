@@ -10,7 +10,11 @@ const App = () => {
   const [products, setProducts] = useState(data.products);
   const [size, setSize] = useState("");
   const [sort, setSort] = useState("");
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(
+    localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : []
+  );
 
   const filterProducts = (event) => {
     const value = event.target.value;
@@ -63,11 +67,22 @@ const App = () => {
       cartItems.push({ ...product, count: 1 });
     }
     setCart(cartItems);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
 
   const removeFromCart = (product) => {
     const cartItems = cart.slice();
     setCart(cartItems.filter((item) => item.id !== product.id));
+    localStorage.setItem(
+      "cartItems",
+      JSON.stringify(
+        cartItems.filter((item) => item.id !== product.id)
+      )
+    );
+  };
+
+  const createOrder = (order) => {
+    alert("Saving order for " + order.name);
   };
 
   return (
@@ -94,6 +109,7 @@ const App = () => {
             <Cart
               cartItems={cart}
               onRemoveFromCart={removeFromCart}
+              onCreateOrder={createOrder}
             />
           </div>
         </div>

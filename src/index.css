@@ -172,3 +172,21 @@ footer {
 .total > button {
   flex: 1;
 }
+
+/* Checkout form */
+.form-container {
+  padding: 0;
+  width: 100%;
+}
+.form-container li {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+form {
+  width: 100%;
+}
+input {
+  padding: 1rem;
+  border: 0.1rem #c0c0c0 solid;
+}
