@@ -4,11 +4,13 @@ import { Route, Switch } from "react-router-dom";
 import data from "../data.json";
 import ProductsContainer from "./ProductsContainer";
 import Filter from "../components/Filter";
+import Cart from "../components/Cart";
 
 const App = () => {
   const [products, setProducts] = useState(data.products);
   const [size, setSize] = useState("");
   const [sort, setSort] = useState("");
+  const [cart, setCart] = useState([]);
 
   const filterProducts = (event) => {
     const value = event.target.value;
@@ -47,6 +49,27 @@ const App = () => {
     );
   };
 
+  const addToCart = (product) => {
+    const cartItems = cart.slice();
+    let inCart = false;
+
+    cartItems.forEach((item) => {
+      if (item.id === product.id) {
+        item.count++;
+        inCart = true;
+      }
+    });
+    if (!inCart) {
+      cartItems.push({ ...product, count: 1 });
+    }
+    setCart(cartItems);
+  };
+
+  const removeFromCart = (product) => {
+    const cartItems = cart.slice();
+    setCart(cartItems.filter((item) => item.id !== product.id));
+  };
+
   return (
     <div className="grid-container">
       <header>
@@ -62,9 +85,17 @@ const App = () => {
               onFilterProducts={filterProducts}
               onSortProducts={sortProducts}
             />
-            <ProductsContainer products={products} />
+            <ProductsContainer
+              products={products}
+              onAddToCart={addToCart}
+            />
           </div>
-          <div className="sidebar">Cart Items</div>
+          <div className="sidebar">
+            <Cart
+              cartItems={cart}
+              onRemoveFromCart={removeFromCart}
+            />
+          </div>
         </div>
       </main>
       <footer>All rights reserved</footer>
