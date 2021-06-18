@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Product 1",
+      "image": "../public/images/product_1.png",
+      "description": "About Product 1",
+      "price": 19.0,
+      "sizes": ["XL", "XXL"]
+    },
+    {
+      "id": 2,
+      "title": "Product 2",
+      "image": "../public/images/product_2.png",
+      "description": "About Product 2",
+      "price": 21.99,
+      "sizes": ["M", "L", "XL", "XXL"]
+    },
+    {
+      "id": 3,
+      "title": "Product 3",
+      "image": "../public/images/product_3.png",
+      "description": "About Product 3",
+      "price": 67.05,
+      "sizes": ["S", "XL", "XXL"]
+    },
+    {
+      "id": 4,
+      "title": "Product 4",
+      "image": "../public/images/product_4.png",
+      "description": "About Product 4",
+      "price": 34.66,
+      "sizes": ["XS", "S", "XL", "XXL"]
+    },
+    {
+      "id": 5,
+      "title": "Product 5",
+      "image": "../public/images/product_5.png",
+      "description": "About Product 5",
+      "price": 27.89,
+      "sizes": ["M", "L", "XL"]
+    },
+    {
+      "id": 6,
+      "title": "Product 6",
+      "image": "../public/images/product_6.png",
+      "description": "About Product 6",
+      "price": 190.0,
+      "sizes": ["S", "M", "XL", "XXL"]
+    }
+  ]
+}

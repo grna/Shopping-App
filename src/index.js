@@ -1,9 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
+import { render } from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
+import thunk from "redux-thunk";
 import App from "./containers/App";
+import "./index.css";
 
-ReactDOM.render(
+render(
   <React.StrictMode>
     <App></App>
   </React.StrictMode>,
