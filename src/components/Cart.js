@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { formatCurrency } from "../utils";
 
-function Cart({ cartItems, onRemoveFromCart }) {
+function Cart({ cartItems, onRemoveFromCart, onCreateOrder }) {
+  const [checkout, setCheckout] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+
+  const handleInput = (event) => {
+    switch (event.target.name) {
+      case "name":
+        setName(event.target.value);
+        break;
+      case "email":
+        setEmail(event.target.email);
+        break;
+      case "address":
+        setAddress(event.target.address);
+        break;
+    }
+  };
+
+  const onChekoutSubmit = (event) => {
+    event.preventDefault();
+    const order = {
+      name: name,
+      email: email,
+      address: address,
+      cartItems: cartItems,
+    };
+    onCreateOrder(order);
+  };
+
   return (
     <div>
       {cartItems.length === 0 ? (
@@ -44,8 +74,58 @@ function Cart({ cartItems, onRemoveFromCart }) {
                   cartItems.reduce((a, c) => a + c.price * c.count, 0)
                 )}
               </div>
-              <button className="button primary">Checkout</button>
+              <button
+                onClick={() => {
+                  setCheckout(true);
+                }}
+                className="button primary"
+              >
+                Checkout
+              </button>
             </div>
+            {checkout && (
+              <div>
+                <form onSubmit={onChekoutSubmit}>
+                  <ul className="form-container">
+                    <li>
+                      <label>Email</label>
+                      <input
+                        name="email"
+                        type="email"
+                        required
+                        onChange={handleInput}
+                      ></input>
+                    </li>
+                    <li>
+                      <label>Name</label>
+                      <input
+                        name="name"
+                        type="text"
+                        required
+                        onChange={handleInput}
+                      ></input>
+                    </li>
+                    <li>
+                      <label>Address</label>
+                      <input
+                        name="address"
+                        type="text"
+                        required
+                        onChange={handleInput}
+                      ></input>
+                    </li>
+                    <li>
+                      <button
+                        className="button primary"
+                        type="submit"
+                      >
+                        Checkout
+                      </button>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -56,6 +136,7 @@ function Cart({ cartItems, onRemoveFromCart }) {
 Cart.propTypes = {
   cartItems: PropTypes.array.isRequired,
   onRemoveFromCart: PropTypes.func.isRequired,
+  onCreateOrder: PropTypes.func.isRequired,
 };
 
 export default Cart;
