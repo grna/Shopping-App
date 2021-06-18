@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: #ff8000;
+}
+li {
+  list-style: none;
+}
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+}
+body,
+input,
+select,
+textarea {
+  font-family: "Poppins", "Sans-serif";
+  font-size: 1.6rem;
+}
+.grid-container {
+  display: grid;
+  grid-template-areas: "header" "main" "footer";
+  grid-template-rows: 5rem 1fr 5rem;
+  grid-template-columns: 1fr;
+  height: 100%;
+}
+header {
+  grid-area: header;
+  background-color: #203040;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+header a {
+  color: #fff;
+}
+main {
+  grid-area: main;
+}
+footer {
+  grid-area: footer;
+  background-color: #203040;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
