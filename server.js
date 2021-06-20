@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
+const cors = require("cors");
 
 const app = express();
 app.use(bodyParser.json());
@@ -23,6 +24,12 @@ const Product = mongoose.model(
     sizes: [String],
   })
 );
+
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
+
+app.use(cors(corsOptions));
 
 app.get("/api/products", async (req, res) => {
   const products = await Product.find({});
