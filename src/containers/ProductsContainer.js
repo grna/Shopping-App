@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { formatCurrency } from "../utils";
 import Fade from "react-reveal/Fade";
@@ -111,7 +111,7 @@ ProductsContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  products: state.products.items,
+  products: state.products.filteredItems,
 });
 
 export default connect(mapStateToProps, {})(ProductsContainer);
