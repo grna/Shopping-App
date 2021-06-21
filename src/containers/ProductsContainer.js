@@ -5,8 +5,9 @@ import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 import { connect } from "react-redux";
+import { addToCart } from "../actions/cartActions";
 
-const ProductsContainer = ({ products, onAddToCart }) => {
+const ProductsContainer = ({ products, addToCart }) => {
   const [product, setProduct] = useState(null);
 
   const openModal = (product) => {
@@ -41,7 +42,7 @@ const ProductsContainer = ({ products, onAddToCart }) => {
                   <div className="product-price">
                     <div>{formatCurrency(product.price)}</div>
                     <button
-                      onClick={() => onAddToCart(product)}
+                      onClick={() => addToCart(product)}
                       className="button primary"
                     >
                       Add To Cart
@@ -80,7 +81,7 @@ const ProductsContainer = ({ products, onAddToCart }) => {
                   <button
                     className="button primary"
                     onClick={() => {
-                      onAddToCart(product);
+                      addToCart(product);
                       closeModal();
                     }}
                   >
@@ -106,12 +107,14 @@ ProductsContainer.propTypes = {
       price: PropTypes.number.isRequired,
       sizes: PropTypes.array.isRequired,
     })
-  ).isRequired,
-  onAddToCart: PropTypes.func.isRequired,
+  ),
+  addToCart: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   products: state.products.filteredItems,
 });
 
-export default connect(mapStateToProps, {})(ProductsContainer);
+export default connect(mapStateToProps, { addToCart })(
+  ProductsContainer
+);
