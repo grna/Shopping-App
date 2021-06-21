@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { formatCurrency } from "../utils";
 import Fade from "react-reveal/Fade";
+import { connect } from "react-redux";
+import { removeFromCart } from "../actions/cartActions";
 
-function Cart({ cartItems, onRemoveFromCart, onCreateOrder }) {
+const Cart = ({ cartItems, removeFromCart }) => {
   const [checkout, setCheckout] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,7 +33,6 @@ function Cart({ cartItems, onRemoveFromCart, onCreateOrder }) {
       address: address,
       cartItems: cartItems,
     };
-    onCreateOrder(order);
   };
 
   return (
@@ -58,7 +59,7 @@ function Cart({ cartItems, onRemoveFromCart, onCreateOrder }) {
                     {formatCurrency(item.price)} x {item.count}{" "}
                     <button
                       className="button"
-                      onClick={() => onRemoveFromCart(item)}
+                      onClick={() => removeFromCart(item)}
                     >
                       Remove
                     </button>
@@ -136,12 +137,25 @@ function Cart({ cartItems, onRemoveFromCart, onCreateOrder }) {
       </div>
     </div>
   );
-}
-
-Cart.propTypes = {
-  cartItems: PropTypes.array.isRequired,
-  onRemoveFromCart: PropTypes.func.isRequired,
-  onCreateOrder: PropTypes.func.isRequired,
 };
 
-export default Cart;
+Cart.propTypes = {
+  cartItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      sizes: PropTypes.array.isRequired,
+    })
+  ).isRequired,
+  removeFromCart: PropTypes.func.isRequired,
+  onCreateOrder: PropTypes.func,
+};
+
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.cartItems,
+});
+
+export default connect(mapStateToProps, { removeFromCart })(Cart);

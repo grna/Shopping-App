@@ -6,15 +6,15 @@ import {
   sortProducts,
 } from "../actions/productActions";
 
-function Filter({
-  size = "",
-  sort = "",
-  products = [],
-  filteredProducts = [],
+const Filter = ({
+  size,
+  sort,
+  products,
+  filteredProducts,
   filterProducts,
   sortProducts,
-}) {
-  return !filterProducts ? (
+}) => {
+  return !filteredProducts ? (
     <div>Loading...</div>
   ) : (
     <div className="filter">
@@ -51,15 +51,15 @@ function Filter({
       </div>
     </div>
   );
-}
+};
 
 Filter.propTypes = {
-  size: PropTypes.string.isRequired,
-  sort: PropTypes.string.isRequired,
-  products: PropTypes.array.isRequired,
-  filteredProducts: PropTypes.array.isRequired,
-  filterProducts: PropTypes.func.isRequired,
-  sortProducts: PropTypes.func.isRequired,
+  size: PropTypes.string,
+  sort: PropTypes.string,
+  products: PropTypes.array,
+  filteredProducts: PropTypes.array,
+  filterProducts: PropTypes.func,
+  sortProducts: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
